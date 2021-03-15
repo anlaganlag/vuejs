@@ -3,6 +3,7 @@
     {{ $store.state.count}}
     <button @click="add">+</button>
     <button @click="addN(5)">+5</button>
+    <button @click="addN(10)">+10</button>
     <HelloWorld msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
