@@ -1,19 +1,18 @@
 <template>
   <div id="app">
-    <p> best </p>
     <div id="nav">
-      <router-link to="/"> Home </router-link> |
-      <router-link to="/cats"> Cats </router-link> |
-      <router-link to="/dogs"> Dogs </router-link> |
+      <router-link to="/">Home</router-link> |
+      <router-link to="/cats">Cats</router-link> |
+      <router-link to="/dogs">Dogs</router-link> |
     </div>
     <b-container>
-      <router-view/>
+      <router-view />
     </b-container>
-  </div>  
+  </div>
 </template>
 
 
-
+./components/PetTable.vue
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

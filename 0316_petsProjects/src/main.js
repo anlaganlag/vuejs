@@ -14,10 +14,10 @@ import { faCat, faDog } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 
 library.add(faCat, faDog);
+
 Vue.component("font-awesome-icon", FontAwesomeIcon);
 
 Vue.use(BootstrapVue);
-
 Vue.config.productionTip = false;
 
 new Vue({

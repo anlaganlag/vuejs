@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>{{ species }} for Adoption</h1>
+    <h1>{{ species }} from Adoptions</h1>
     <b-table striped hover :items="pets">
       <template slot="name" slot-scope="data">
         <router-link :to="`/pets/${species}/${data.index}`">
@@ -15,7 +15,7 @@
 export default {
   props: {
     species: String,
-    pets: Array
-  }
-}
+    pets: Array,
+  },
+};
 </script>
