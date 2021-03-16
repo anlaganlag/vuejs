@@ -1,8 +1,8 @@
 <template>
   <div id="crud">
-    {{ itemc }}
-    <button @click="update(item)">Update</button>
-    <button @click="$emit('del')">Delete</button>
+    {{ item }}
+    <button @click="$emit('update',idx)">Update</button>
+    <button @click="$emit('del',idx)">Delete</button>
   </div>
 </template>
 
@@ -10,23 +10,11 @@
 export default {
   name: "CRUD",
   props: {
-    msg: String,
     item: String,
     idx: Number,
   },
-  data() {
-    return {
-      itemc: this.item,
-      idxc: this.idx,
-    };
-  },
-  methods: {
-    update() {
-      if (this.msg) {
-        this.itemc = this.msg;
-      }
-    },
-  },
+
+
 };
 </script>
 
