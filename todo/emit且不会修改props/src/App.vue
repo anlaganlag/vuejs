@@ -30,8 +30,8 @@ export default {
     };
   },
   methods: {
-    create(text) {
-      this.items.push(text);
+    create(msg) {
+      this.items.push(msg);
     },
     del(idx) {
       this.items.splice(idx, 1);
