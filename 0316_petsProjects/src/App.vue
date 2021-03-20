@@ -12,7 +12,6 @@
 </template>
 
 
-./components/PetTable.vue
 <style lang="scss">
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
