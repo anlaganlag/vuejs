@@ -1,8 +1,7 @@
 <template>
   <div class="cardBox">
     <div class="container">
-      <h2>今天是:</h2>
-      <h3>{{ getCurrentDate }}</h3>
+      <h3>今天:{{ getCurrentDate }}</h3>
     </div>
   </div>
 </template>

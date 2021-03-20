@@ -1,35 +1,43 @@
-<template>
-  <div class="cardBox">
-    <div class="container tasker">
-      <strong>My task is: {{ task }}</strong>
-      <input type="text" v-model="task" class="taskInput" />
+  <template>
+    <div class="cardBox">
+      <div class="container tasker">
+        <strong>我的任务是: {{ task }}</strong>
+        <input type="text" v-model="task" class="taskInput" />
+        <button @click="addTask">添加</button>
+      </div>
     </div>
-  </div>
-</template>
+  </template>
 
-<script>
-export default {
-  name: "TaskInput",
-  data: () => ({
-    task: "",
-  }),
-};
-</script>
+  <script>
+  export default {
+    name: "TaskInput",
+    data: () => ({
+      task: "",
+    }),
+    methods: {
+      addTask() {
+        this.$emit("add-task", this.task);
+        this.task = "";
+      },
+    },
+  };
+  </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+  <!-- Add "scoped" attribute to limit CSS to this component only -->
+  <style scoped>
+  .tasker {
+    margin: 20px;
+  }
+  .tasker .taskInput {
+    font-size: 14px;
+    margin: 0 10px;
+    border: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.75);
+  }
+  .tasker button {
+    border: 1px solid rgba(0, 0, 0, 0.75);
+    border-radius: 3px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2);
+  }
+  </style>
+
