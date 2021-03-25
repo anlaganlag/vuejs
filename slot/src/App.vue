@@ -5,20 +5,50 @@
     <div class="col-12">
       <div class="cardBox">
         <div class="container">
-          <h2>任务列表</h2>
+          <h2>My Tasks</h2>
+          <hr />
+          <div class="col-4">
+            <input
+              v-model="hideDone"
+              type="checkbox"
+              id="hideDone"
+              name="hideDone"
+            />
+            <label for="hideDone"> Hide Done Tasks </label>
+          </div>
+          <div class="col-4">
+            <input
+              v-model="reverse"
+              type="checkbox"
+              id="reverse"
+              name="reverse"
+            />
+            <label for="reverse"> Reverse Order </label>
+          </div>
+          <div class="col-4">
+            <input
+              v-model="sortById"
+              type="checkbox"
+              id="sortById"
+              name="sortById"
+            />
+            <label for="sortById"> Sort By Id </label>
+          </div>
           <ul class="taskList">
             <li
-              v-for="(taskItem, index) in taskList"
+              v-for="(taskItem, index) in displayList"
               :key="`${index}_${Math.random()}`"
+              :class="!!taskItem.finishedAt ? 'taskDone' : ''"
             >
               <input
                 type="checkbox"
                 :checked="!!taskItem.finishedAt"
-                @input="changeStatus(index)"
+                @input="changeStatus(taskItem.id)"
               />
-              {{ taskItem.task }}
+              #{{ taskItem.id }} - {{ taskItem.task }}
               <span v-if="taskItem.finishedAt">
-                {{ taskItem.finishedAt }}
+                | Done at:
+                {{ formatDate(taskItem.finishedAt) }}
               </span>
             </li>
           </ul>
@@ -33,7 +63,7 @@ import CurrentTime from "./components/CurrentTime.vue";
 import TaskInput from "./components/TaskInput.vue";
 
 export default {
-  name: "App",
+  name: "TodoApp",
   components: {
     TaskInput,
     CurrentTime,
@@ -41,7 +71,30 @@ export default {
   data: () => ({
     taskList: [],
   }),
+  computed: {
+    displayList() {
+      return this.taskList;
+    },
+  },
   methods: {
+    formatDate(value) {
+      if (!value) return "";
+      if (typeof value !== "number") return value;
+
+      const browserLocale =
+        navigator.languages && navigator.languages.length
+          ? navigator.languages[0]
+          : navigator.language;
+      const intlDateTime = new Intl.DateTimeFormat(browserLocale, {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+        hour: "numeric",
+        minute: "numeric",
+      });
+
+      return intlDateTime.format(new Date(value));
+    },
     addNewTask(task) {
       this.taskList.push({ task, createdAt: Date.now(), finishedAt: null });
     },
@@ -50,7 +103,7 @@ export default {
       if (task.finishedAt) {
         task.finishedAt = null;
       } else {
-        task.finishedAt = (new Date).toLocaleString()
+        task.finishedAt = new Date().toLocaleString();
       }
     },
   },
@@ -58,13 +111,32 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  .taskList li {
+    list-style: none;
+    text-align: left;
+    padding: 5px 10px;
+    border-bottom: 1px solid rgba(0,0,0,0.15);
+  }
 
-}
+  .taskList li:last-child {
+    border-bottom: 0px;
+  }
+
+  .taskList li:nth-child(even){
+    background-color: rgba(0,0,0,0.05);
+  }
+
+  @keyframes colorChange {
+    from{
+      background-color: inherit;
+    }
+    to{
+      background-color: rgba(0, 160, 24, 0.577); 
+    }
+  }
+
+  .taskList li.taskDone{
+    animation: colorChange 1s ease;
+    background-color: rgba(0, 160, 24, 0.577);
+  }
 </style>
