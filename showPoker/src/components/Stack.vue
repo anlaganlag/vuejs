@@ -45,68 +45,67 @@ export default {
 }
 .card {
   position: absolute;
-  height: ;
 }
 .card0 {
-  left: 30px;
+  left: 0px;
   z-index: 0;
 }
 .card1 {
-  left: 60px;
+  left: 100px;
   z-index: 1;
 }
 .card2 {
-  left: 90px;
+  left: 200px;
   z-index: 2;
 }
 .card3 {
-  left: 120px;
+  left: 230px;
   z-index: 3;
 }.card4 {
-  left: 150px;
+  left: 260px;
   z-index: 4;
 }.card5 {
-  left: 180px;
+  left: 290px;
   z-index: 5;
 }.card6 {
-  left: 210px;
+  left: 320px;
   z-index: 6;
 }.card7 {
-  left: 240px;
+  left: 350px;
   z-index: 7;
 }.card8 {
-  left: 270px;
+  left: 380px;
   z-index: 8;
 }.card9 {
-  left: 300px;
+  left: 410px;
   z-index: 9;
 }
 .card10 {
-  left: 330px;
+  left: 440px;
   z-index: 10;
 }
 .card11 {
-  left: 360px;
+  left: 470px;
   z-index: 11;
 }
 .card12 {
-  left: 390px;
+  left: 500px;
   z-index: 12;
 }
 .card13 {
-  left: 420px;
+  left: 530px;
   z-index: 13;
 }
 .card14 {
-  left: 450px;
+  left: 560px;
   z-index: 14;
 }
 .card15 {
-  left: 480px;
+  left: 590px;
   z-index: 15;
 }
 .card16 {
-  left: 510px;
+  left: 620px;
   z-index: 16;
 }
 </style>

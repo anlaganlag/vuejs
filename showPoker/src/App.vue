@@ -11,13 +11,12 @@ export default {
   name: 'App',
   data(){
     return {
-      list:["2", "K", "K", "A", "0", "0", 9, 8, 8, 8, 7, 7, 6, 5, 5, 4, 3]
-    }
+      list:["X1", "X2", 2, 2, 2, 2, "A", "A", "A", "K", "Q", "Q", 0, 0, 0, 9, 9] }
   },
   methods:{
         calImg(arr) {
                 const l = ["S","H","D","C"]
-      return arr.map((i) => `./imgs/${i+l[ Math.floor(Math.random()*4)]}.png`);
+      return arr.map((i) => `./imgs/${i+l[ Math.floor(Math.random()*(l.length))]}.png`);
     },
 
   },
