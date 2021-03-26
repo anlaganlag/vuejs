@@ -1,8 +1,14 @@
 <template>
   <div id="app">
-    <Stack :arr="calImg(dealed[0])" />
+    <!-- <Stack :arr="calImg(pick)" /> -->
+
+    <h1>天地赖子</h1>
+    <Stack :arr="calImg(pick)" />
 
     <h1>底牌</h1>
+    <Stack :arr="calImg(dealed[0])" />
+
+    <h1>第一玩家</h1>
     <Stack :arr="calImg(dealed[1])" />
 
     <h1>第一玩家</h1>
@@ -27,6 +33,16 @@ export default {
     };
   },
   computed: {
+    pick: function () {
+      let arr = this.all.slice(0);
+      let idx1 = Math.floor(Math.random() * arr.length);
+      const res1 = arr.splice(idx1, 1);
+
+      let idx2 = Math.floor(Math.random() * arr.length);
+      const res2 = arr.splice(idx2, 1);
+      // console.log([...res1, ...res2]);
+      return [...res1, ...res2];
+    },
     dealed: function () {
       const arr = this.all;
       var shuffled = arr.slice(0),
@@ -43,7 +59,6 @@ export default {
       const h1 = shuffled.slice(3, 20).sort((a, b) => b.value - a.value);
       const h2 = shuffled.slice(20, 37).sort((a, b) => b.value - a.value);
       const h3 = shuffled.slice(37, 54).sort((a, b) => b.value - a.value);
-      console.log(r[0].card);
       return [r, h1, h2, h3];
     },
   },
