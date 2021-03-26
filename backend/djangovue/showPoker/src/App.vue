@@ -1,17 +1,16 @@
 <template>
   <div id="app">
-    <Stack :arr="calImg(dealCards()[0])" />
+    <Stack :arr="calImg(dealed[0])" />
 
     <h1>底牌</h1>
-    <Stack :arr="calImg(dealCards()[1].sort((a, b) => b.value - a.value))" />
+    <Stack :arr="calImg(dealed[1])" />
 
     <h1>第一玩家</h1>
-    <Stack :arr="calImg(dealCards()[2].sort((a, b) => b.value - a.value))" />
-
+    <Stack :arr="calImg(dealed[2])" />
 
     <h1>第二玩家</h1>
-    <Stack :arr="calImg(dealCards()[3].sort((a, b) => b.value - a.value))" />
 
+    <Stack :arr="calImg(dealed[3])" />
 
     <h1>第三玩家</h1>
   </div>
@@ -27,14 +26,8 @@ export default {
       all: py.allCard,
     };
   },
-  methods: {
-    calImg(arr) {
-      return arr.map(
-        // (i) => `static/vue/imgs/${i}.png`
-        (i) => `./imgs/${i.card}.png`
-      );
-    },
-    dealCards() {
+  computed: {
+    dealed: function () {
       const arr = this.all;
       var shuffled = arr.slice(0),
         i = arr.length,
@@ -46,11 +39,20 @@ export default {
         shuffled[index] = shuffled[i];
         shuffled[i] = temp;
       }
-      const r = shuffled.slice(0,3)
-      const h1 = shuffled.slice(3,20)
-      const h2 = shuffled.slice(20,37)
-      const h3 = shuffled.slice(37,54)
-      return [r,h1,h2,h3]
+      const r = shuffled.slice(0, 3).sort((a, b) => b.value - a.value);
+      const h1 = shuffled.slice(3, 20).sort((a, b) => b.value - a.value);
+      const h2 = shuffled.slice(20, 37).sort((a, b) => b.value - a.value);
+      const h3 = shuffled.slice(37, 54).sort((a, b) => b.value - a.value);
+      console.log(r[0].card);
+      return [r, h1, h2, h3];
+    },
+  },
+  methods: {
+    calImg(arr) {
+      return arr.map(
+        // (i) => `static/vue/imgs/${i}.png`
+        (i) => `./imgs/${i.card}.png`
+      );
     },
   },
   components: {
