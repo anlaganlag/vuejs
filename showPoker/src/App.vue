@@ -1,29 +1,38 @@
 <template>
   <div id="app">
-    <Stack :arr="calImg(list)" />
+    <Stack :arr="calImg(py[3])" />
+    <h1>底牌</h1>
+    <Stack :arr="calImg(py[0])" />
+    <h1>第一玩家</h1>
+    <Stack :arr="calImg(py[1])" />
+    <h1>第二玩家</h1>
+
+    <Stack :arr="calImg(py[2])" />
+    <h1>第三玩家</h1>
   </div>
 </template>
 
 <script>
-import Stack from './components/Stack.vue'
-
+import Stack from "./components/Stack.vue";
+import  py from "./data";
 export default {
-  name: 'App',
-  data(){
+  name: "App",
+  data() {
+    console.log(py.data);
     return {
-      list:["X1", "X2", 2, 2, 2, 2, "A", "A", "A", "K", "Q", "Q", 0, 0, 0, 9, 9] }
-  },
-  methods:{
-        calImg(arr) {
-                const l = ["S","H","D","C"]
-      return arr.map((i) => `./imgs/${i+l[ Math.floor(Math.random()*(l.length))]}.png`);
+py:py.data
+  }},
+  methods: {
+    calImg(arr) {
+      return arr.map(
+        (i) => `./imgs/${i}.png`
+      );
     },
-
   },
   components: {
-    Stack
-  }
-}
+    Stack,
+  },
+};
 </script>
 
 <style>

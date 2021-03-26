@@ -20,6 +20,7 @@ export default {
       },
     };
   },
+
   methods: {
     calculate(index) {
       return `card card${index}`;
