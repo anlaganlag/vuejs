@@ -66,7 +66,7 @@ export default {
     calImg(arr) {
       return arr.map(
         // (i) => `static/vue/imgs/${i}.png`
-        (i) => `./imgs/${i.card}.png`
+        (i) => `static/vue/imgs/${i.card}.png`
       );
     },
   },
