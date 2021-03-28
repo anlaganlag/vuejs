@@ -11,25 +11,13 @@
 <script>
 export default {
   name: "Stack",
-  data() {
-    return {
-      styleObject: {
-        color: "red",
-        zIndex: 0,
-        left: "75px",
-      },
-    };
-  },
+
 
   methods: {
     calculate(index) {
       return `card card${index}`;
     },
-    getImg(i) {
-      const l = ["S","H","D","C"]
-      let idx = Math.floor(Math.random()*4)
-      return `./imgs/${i+l[idx]}.png`;
-    },
+
 
   },
 

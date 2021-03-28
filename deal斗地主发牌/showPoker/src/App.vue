@@ -2,21 +2,66 @@
   <div id="app">
     <!-- <Stack :arr="calImg(pick)" /> -->
 
-    <h1>天地赖子</h1>
-    <Stack :arr="calImg(pick)" />
+    <Stack v-show="showpick" :arr="calImg(pick)" />
+    <h1>赖子</h1>
 
-    <h1>底牌</h1>
-    <Stack :arr="calImg(dealed[0])" />
+    <Stack v-show="showit" :arr="calImg(dealed[0])" />
+    <button
+      @click="
+        () => {
+          showit = !showit;
+        }
+      "
+    >
+      底牌
+    </button>
+        <button
+      @click="
+        () => {
+          show1 = !show1;
+        }
+      "
+    >
+      1
+    </button>
+        <button
+      @click="
+        () => {
+          show2 = !show2;
+        }
+      "
+    >
+      2
+    </button>
+
+        <button
+      @click="
+        () => {
+          show3 = !show3;
+        }
+      "
+    >
+      3
+    </button>
+
+        <button
+      @click="
+        () => {
+          showpick = !showpick;
+        }
+      "
+    >
+      显示赖子
+    </button>
+
+    <Stack v-show="show1" :arr="calImg(dealed[1])" />
 
     <h1>第一玩家</h1>
-    <Stack :arr="calImg(dealed[1])" />
-
-    <h1>第一玩家</h1>
-    <Stack :arr="calImg(dealed[2])" />
+    <Stack v-show="show2" :arr="calImg(dealed[2])" />
 
     <h1>第二玩家</h1>
 
-    <Stack :arr="calImg(dealed[3])" />
+    <Stack v-show="show3" :arr="calImg(dealed[3])" />
 
     <h1>第三玩家</h1>
   </div>
@@ -30,9 +75,18 @@ export default {
   data() {
     return {
       all: py.allCard,
+      showpick:false,
+      showit: false,
+      show1: true,
+      show2: false,
+      show3: false,
     };
   },
   computed: {
+    // showButton: function () {
+    //   this.showit = !this.showit;
+    //   return
+    // },
     pick: function () {
       let arr = this.all.slice(0);
       let idx1 = Math.floor(Math.random() * arr.length);
@@ -44,11 +98,11 @@ export default {
       return [...res1, ...res2];
     },
     dealed: function () {
-      const arr = this.all;
-      var shuffled = arr.slice(0),
-        i = arr.length,
-        temp,
-        index;
+      let shuffled = this.all.slice(0);
+      let temp = null;
+      let i = shuffled.length;
+      let index = null;
+
       while (i--) {
         index = Math.floor((i + 1) * Math.random());
         temp = shuffled[index];
@@ -65,8 +119,8 @@ export default {
   methods: {
     calImg(arr) {
       return arr.map(
-        // (i) => `static/vue/imgs/${i}.png`
-        (i) => `static/vue/imgs/${i.card}.png`
+        (i) => `./imgs/${i.card}.png`
+        // (i) => `static/vue/imgs/${i.card}.png`
       );
     },
   },
