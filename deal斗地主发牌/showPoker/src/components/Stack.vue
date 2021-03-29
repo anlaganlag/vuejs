@@ -110,4 +110,5 @@ export default {
   left: 710px;
   z-index: 19;
 }
+
 </style>
