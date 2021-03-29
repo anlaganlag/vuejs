@@ -2,11 +2,11 @@
   <div id="app">
     <!-- <Stack :arr="calImg(pick)" /> -->
 
-    <Stack v-show="showpick" :arr="calOriImg(pick)" class="forAllCard" />
+    <Stack v-show="showpick" :arr="calImg(sorted(pick))" class="forAllCard" />
     <h1>赖子</h1>
     <h1>赖子</h1>
 
-    <Stack v-show="showit" :arr="calImg(dealed[0])" />
+    <Stack v-show="showit" :arr="calImg(sorted(dealed[0]))" />
 
     <button
       @click="
@@ -22,7 +22,6 @@
         () => {
           show1 = !show1;
           showr1 = true;
-
 
           showr2 = false;
           showr3 = false;
@@ -71,10 +70,15 @@
       显示赖子
     </button>
 
-
+    <h1>底牌</h1>
     <h1>底牌</h1>
 
-    <Stack v-show="showr1" v-if="show1" :arr="calImg(sorted(dealed[1]))" />
+    <Stack
+      @clickE="handleClick"
+      v-show="showr1"
+      v-if="show1"
+      :arr="calImg(sorted(dealed[1]))"
+    />
     <Stack v-show="showr1" v-else :arr="calImg(sorted(completed[0]))" />
 
     <h1>第一玩家</h1>
@@ -99,12 +103,15 @@ export default {
     return {
       all: py.allCard1,
       all2: py.allCard2,
-      showpick: false,
+      showpick: true,
       showit: true,
       show1: true,
       showr1: true,
       show2: false,
       show3: false,
+      showr2: false,
+      showr3: false,
+
       pickone: [],
       pickoneNum: [],
       cc: false,
@@ -129,7 +136,7 @@ export default {
       const res2 = arr.splice(idx2, 1);
       console.log(res2[0].card);
 
-      // console.log([...res1, ...res2]);
+      console.log([...res1, ...res2]);
       return [...res1, ...res2];
     },
     dealed: function () {
@@ -144,10 +151,11 @@ export default {
         shuffled[index] = shuffled[i];
         shuffled[i] = temp;
       }
-      const r = this.getCard(shuffled.slice(0, 3));
-      const h1 = this.getCard(shuffled.slice(3, 20));
-      const h2 = this.getCard(shuffled.slice(20, 37));
-      const h3 = this.getCard(shuffled.slice(37, 54));
+      console.log(shuffled);
+      const r = shuffled.slice(0, 3);
+      const h1 = shuffled.slice(3, 20);
+      const h2 = shuffled.slice(20, 37);
+      const h3 = shuffled.slice(37, 54);
       return [r, h1, h2, h3];
     },
     completed: function () {
@@ -157,28 +165,42 @@ export default {
     },
   },
   methods: {
+    handleClick(i) {
+      console.log("开始处理点击!",i);
+      i.clicked = !i.clicked;
+      // alert(`${i.card}被点击了!,当前被点击状态是${i.clicked}`)
+    },
     sorted: function (l) {
       let arr = l;
-      arr.sort((a, b) => this.all2[b] - this.all2[a]);
+      arr.sort((a, b) => b.value - a.value);
       return arr;
     },
-    getCard: function (l) {
-      return l.map((i) => i.card);
-    },
+    // getCard: function (l) {
+    //   return l.map((i) => i.card);
+    // },
     getPicked() {
       this.pickone = [this.pick[0].card, this.pick[1].card];
       this.pickoneNum = this.pickone.map((i) => i[0]);
     },
+    // calImg(arr) {
+    //   return arr.map(
+    //     (i) => {
+    //       const ans = this.pickoneNum.includes(i[0])
+    //         ? `./imgs/${i}t.png`
+    //         : `./imgs/${i}.png`;
+    //       return ans;
+    //     }
+    //     // (i) => `static/vue/imgs/${i.card}.png`
+    //   );
+    // },
+
     calImg(arr) {
-      return arr.map(
-        (i) => {
-          const ans = this.pickoneNum.includes(i[0])
-            ? `./imgs/${i}t.png`
-            : `./imgs/${i}.png`;
-          return ans;
-        }
-        // (i) => `static/vue/imgs/${i.card}.png`
-      );
+      return arr.map((i) => {
+        const ans = this.pickoneNum.includes(i.card[0])
+          ? { ...i, img: `./imgs/${i.card}t.png` }
+          : { ...i, img: `./imgs/${i.card}.png` };
+        return ans;
+      });
     },
     calOriImg(arr) {
       return arr.map(

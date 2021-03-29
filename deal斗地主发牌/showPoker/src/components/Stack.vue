@@ -1,8 +1,17 @@
 <template>
   <div class="stack">
     <ul>
-      <li v-for="(i, idx) in arr" :key="i+Math.random()" :class="calculate(idx)">
-        <img :src=i />
+      <li
+        v-for="(i, idx) in arr"
+        :key="idx + Math.random()"
+        :class="calculate(idx)"
+      >
+        <!-- <img :src=i :class="[clicked ? 'clicked' : 'noClicked']"/> -->
+        <img
+          :src="i.img"
+          @click="clickImg(i)"
+          :class="clickclass(i)"
+        />
       </li>
     </ul>
   </div>
@@ -11,14 +20,22 @@
 <script>
 export default {
   name: "Stack",
-
+  data() {
+    return {
+      activeClass: -1, // 0为默认选择第一个，-1为不选择
+    };
+  },
 
   methods: {
     calculate(index) {
       return `card card${index}`;
     },
-
-
+    clickImg(i) {
+      this.$emit('clickE',i)
+    },
+    clickclass(i){
+      return i.clicked?"yeah":"no"
+    },
   },
 
   props: {
@@ -29,6 +46,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.active {
+  /* background: #eee; */
+  color: #1e82d2;
+  font-weight: bolder;
+}
 .stack li {
   list-style-type: none;
 }
@@ -50,22 +72,28 @@ export default {
 .card3 {
   left: 230px;
   z-index: 3;
-}.card4 {
+}
+.card4 {
   left: 260px;
   z-index: 4;
-}.card5 {
+}
+.card5 {
   left: 290px;
   z-index: 5;
-}.card6 {
+}
+.card6 {
   left: 320px;
   z-index: 6;
-}.card7 {
+}
+.card7 {
   left: 350px;
   z-index: 7;
-}.card8 {
+}
+.card8 {
   left: 380px;
   z-index: 8;
-}.card9 {
+}
+.card9 {
   left: 410px;
   z-index: 9;
 }
@@ -110,5 +138,4 @@ export default {
   left: 710px;
   z-index: 19;
 }
-
 </style>
