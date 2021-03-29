@@ -4,6 +4,7 @@
 
     <Stack v-show="showpick" :arr="calOriImg(pick)" class="forAllCard" />
     <h1>赖子</h1>
+    <h1>赖子</h1>
 
     <Stack v-show="showit" :arr="calImg(dealed[0])" />
 
@@ -70,15 +71,8 @@
       显示赖子
     </button>
 
-    <button
-      @click="
-        () => {
-          showpick = !showpick;
-        }
-      "
-    >
-      增加底牌
-    </button>
+
+    <h1>底牌</h1>
 
     <Stack v-show="showr1" v-if="show1" :arr="calImg(sorted(dealed[1]))" />
     <Stack v-show="showr1" v-else :arr="calImg(sorted(completed[0]))" />
