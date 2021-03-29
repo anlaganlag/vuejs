@@ -97,4 +97,17 @@ export default {
   left: 620px;
   z-index: 16;
 }
+.card17 {
+  left: 650px;
+  z-index: 17;
+}
+.card18 {
+  left: 680px;
+  z-index: 18;
+}
+
+.card19 {
+  left: 710px;
+  z-index: 19;
+}
 </style>
