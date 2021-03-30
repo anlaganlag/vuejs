@@ -10,7 +10,7 @@
         <img
           :src="i.img"
           @click="clickImg(i)"
-          :class="clickclass(i)"
+          :class="{ mark: !i.clicked }"
         />
       </li>
     </ul>

@@ -79,7 +79,7 @@
       v-if="show1"
       :arr="calImg(sorted(dealed[1]))"
     />
-    <Stack v-show="showr1" v-else :arr="calImg(sorted(completed[0]))" />
+    <Stack  @clickE="handleClick" v-show="showr1" v-else :arr="calImg(sorted(completed[0]))" />
 
     <h1>第一玩家</h1>
     <Stack v-show="showr2" v-if="show2" :arr="calImg(sorted(dealed[2]))" />
@@ -166,8 +166,10 @@ export default {
   },
   methods: {
     handleClick(i) {
-      console.log("开始处理点击!",i);
-      i.clicked = !i.clicked;
+      const theObject = this.all.filter(a=>a.card===i.card)
+      theObject[0].clicked = !theObject[0].clicked
+      // console.log("开始处理点击!", i);
+      // i.clicked = !i.clicked;
       // alert(`${i.card}被点击了!,当前被点击状态是${i.clicked}`)
     },
     sorted: function (l) {
@@ -226,8 +228,10 @@ export default {
   color: #2c3e50;
   margin-top: 60px;
 }
-.forAllCard img {
-  border: 5px solid red;
+.mark {
+  position: absolute;
+  top:-20px;
+  left:-3px
 }
 h1 {
   color: white;
